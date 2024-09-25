@@ -7,7 +7,7 @@ import { SortPipe } from './sort.pipe';
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [DatePipe, DecimalPipe, TempPipe, SortPipe]
+  imports: [DatePipe, DecimalPipe, TempPipe, SortPipe],
 })
 export class AppComponent {
   currentDate = new Date();
@@ -23,9 +23,9 @@ export class AppComponent {
   ];
 
   onReset(index: number) {
-    // this.historicTemperatures[index] = 18;
-    const tempArr = [...this.historicTemperatures];
-    tempArr[index] = 18;
-    this.historicTemperatures = tempArr;
+    this.historicTemperatures[index] = 18;
+    // const tempArr = [...this.historicTemperatures];
+    // tempArr[index] = 18;
+    // this.historicTemperatures = tempArr;
   }
 }
