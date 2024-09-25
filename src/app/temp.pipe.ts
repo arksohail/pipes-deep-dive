@@ -6,11 +6,15 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class TempPipe implements PipeTransform {
   transform(
-    value: string | number,
+    value: string | number | null,
     inputType: 'cel' | 'fah',
     outputType?: 'cel' | 'fah',
   ) {
     // console.log(value, "- TRANSFORMED");
+
+    if (!value) {
+      return value;
+    }
     let val;
     if (typeof value === 'string') {
       val = parseFloat(value);
@@ -19,7 +23,7 @@ export class TempPipe implements PipeTransform {
     }
 
     let outputTemp: number;
-    
+
     if (inputType === 'cel' && outputType === 'fah') {
       outputTemp = val * (9 / 5) + 32;
     } else if (inputType === 'fah' && outputType === 'cel') {
@@ -27,17 +31,17 @@ export class TempPipe implements PipeTransform {
     } else {
       outputTemp = val
     }
-    
+
     let symbol: '°F' | '°C';
-    
-    if(!outputType) {
+
+    if (!outputType) {
       symbol = inputType === 'cel' ? '°C' : '°F';
     } else {
       symbol = outputType === 'cel' ? '°C' : '°F';
     }
-    
 
-    return `${outputTemp} ${symbol}`;
+
+    return `${outputTemp.toFixed(2)} ${symbol}`;
   }
 
 }
